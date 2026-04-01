@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Mindful Mosaic | Modern Blog with Social Sharing & Audio</title>
+    <style>
+        /* ========== GLOBAL STYLES & RESET ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background: #faf9f6;
+            color: #1e2a2f;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* modern gradient accent */
+        :root {
+            --primary: #3b6e5c;
+            --primary-dark: #2c5546;
+            --secondary: #e9b35f;
+            --gray-light: #f0ede8;
+            --gray-mid: #cbd2cf;
+            --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 20px 25px -12px rgba(0, 0, 0, 0.08);
+        }
+
+        /* container & layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== HEADER & NAVIGATION ========== */
+        .site-header {
+            background: white;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(2px);
+            background: rgba(255, 255, 245, 0.96);
+            border-bottom: 1px solid #e2e0d4;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 1rem 0;
+            gap: 1rem;
+        }
+
+        .logo a {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #2c6e5c, #e9b35f);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links ul {
+            display: flex;
+            gap: 1.8rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2c4a3e;
+            transition: 0.2s;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            border-bottom-color: var(--secondary);
+            color: var(--primary-dark);
+        }
+
+        /* search bar */
+        .search-area {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .search-area input {
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+            border: 1px solid #ddd2bc;
+            background: white;
+            font-size: 0.85rem;
+            width: 180px;
+        }
+
+        .search-area button {
+            background: var(--primary);
+            border: none;
+            padding: 0 1rem;
+            border-radius: 60px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .search-area button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* main blog grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        /* POST CARD STYLES */
+        .post-card {
+            background: white;
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 3rem;
+            transition: 0.2s;
+            border: 1px solid #efebe3;
+        }
+
+        .post-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            background: #dbd2c4;
+        }
+
+        .post-content {
+            padding: 1.8rem 2rem 2rem;
+        }
+
+        .post-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1e3a2f;
+            line-height: 1.3;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1.2rem;
+            color: #6f7c6f;
+            font-size: 0.85rem;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px dashed #e9e2d4;
+            padding-bottom: 0.7rem;
+            flex-wrap: wrap;
+        }
+
+        /* Tags Styling */
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: #f0ede8;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #3b6e5c;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .tag:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .post-excerpt {
+            color: #2d3e36;
+            margin-bottom: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .read-more {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: 0.2s;
+        }
+
+        .read-more:hover {
+            gap: 0.6rem;
+            color: var(--secondary);
+        }
+
+        /* Action Buttons (Listen to Article) */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .listen-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: 40px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: linear-gradient(135deg, #6c5ce7, #5a4ac7);
+            color: white;
+            font-size: 0.95rem;
+        }
+
+        .listen-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+        }
+
+        .listen-btn.playing {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; transform: scale(1.01); }
+        }
+
+        /* Social Share Buttons */
+        .social-share {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid #e9e2d4;
+            border-bottom: 1px solid #e9e2d4;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .share-twitter {
+            background: #1DA1F2;
+            color: white;
+        }
+        .share-twitter:hover { background: #0d8ae0; transform: translateY(-2px); }
+
+        .share-facebook {
+            background: #4267B2;
+            color: white;
+        }
+        .share-facebook:hover { background: #365899; transform: translateY(-2px); }
+
+        .share-linkedin {
+            background: #0077b5;
+            color: white;
+        }
+        .share-linkedin:hover { background: #005582; transform: translateY(-2px); }
+
+        .share-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        .share-whatsapp:hover { background: #128C7E; transform: translateY(-2px); }
+
+        .copy-link {
+            background: #6c757d;
+            color: white;
+        }
+        .copy-link:hover { background: #5a6268; transform: translateY(-2px); }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .widget {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #efebe3;
+        }
+
+        .widget h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--secondary);
+            padding-left: 0.8rem;
+        }
+
+        .category-list, .tag-cloud {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        .category-list li, .tag-cloud li {
+            margin-bottom: 0.5rem;
+        }
+        .category-list a, .tag-cloud a {
+            text-decoration: none;
+            background: #f0ede8;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            color: #3f5e51;
+            font-size: 0.85rem;
+            transition: 0.1s;
+            display: inline-block;
+        }
+        .category-list a:hover, .tag-cloud a:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        .category-list a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* COMMENT SECTION */
+        .comment-section {
+            margin-top: 2rem;
+            background: #fefcf8;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #ece3d8;
+        }
+
+        .comment-title {
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .comment-form input, .comment-form textarea {
+            padding: 0.8rem 1rem;
+            border: 1px solid #e2d9cd;
+            border-radius: 1rem;
+            font-family: inherit;
+            background: white;
+        }
+
+        .comment-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: fit-content;
+            transition: 0.2s;
+        }
+
+        .comment-list {
+            max-height: 350px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .single-comment {
+            background: white;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border-left: 3px solid var(--secondary);
+        }
+
+        .comment-name {
+            font-weight: 700;
+            color: #2c5a48;
+        }
+        .comment-text {
+            margin-top: 0.3rem;
+            color: #2e3b35;
+        }
+
+        /* Full post view */
+        .full-post-view {
+            background: white;
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .full-post-img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        /* responsive */
+        @media (max-width: 800px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .header-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+            .search-area input {
+                width: 140px;
+            }
+            .post-title {
+                font-size: 1.6rem;
+            }
+            .social-share {
+                justify-content: center;
+            }
+            .action-buttons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .container {
+                padding: 0 16px;
+            }
+            .post-content {
+                padding: 1.2rem;
+            }
+            .share-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.75rem;
+            }
+            .listen-btn {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid #e3dccc;
+            margin-top: 2rem;
+            color: #6e7a6e;
+        }
+
+        .toast-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            z-index: 1000;
+            animation: fadeInOut 2s ease;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(20px); }
+            15% { opacity: 1; transform: translateY(0); }
+            85% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(20px); }
+        }
+
+        /* Audio status indicator */
+        .audio-status {
+            font-size: 0.7rem;
+            color: #6c5ce7;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+<header class="site-header">
+    <div class="container header-inner">
+        <div class="logo">
+            <a href="#" id="homeLogoLink">📖 Mindful Mosaic</a>
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="#" data-nav="home" class="active">Home</a></li>
+                <li><a href="#" data-nav="about">About</a></li>
+                <li><a href="#" data-nav="contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="search-area">
+            <input type="text" id="searchInput" placeholder="Search posts...">
+            <button id="searchBtn">🔍</button>
+        </div>
+    </div>
+</header>
+
+<main class="container" id="mainContent">
+    <div id="blogListing" class="blog-grid">
+        <div id="postsContainer" class="posts-list"></div>
+        <aside class="sidebar">
+            <div class="widget">
+                <h3>📂 Categories</h3>
+                <ul class="category-list" id="categoryList"></ul>
+            </div>
+            <div class="widget">
+                <h3>🏷️ Popular Tags</h3>
+                <ul class="tag-cloud" id="tagCloud"></ul>
+            </div>
+            <div class="widget">
+                <h3>✨ About the Blog</h3>
+                <p>Musings on design, travel, and mindful living. We share stories that inspire curiosity. Leave a comment & join the conversation.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">🔊 <strong>New:</strong> Listen to articles with text-to-speech!</p>
+            </div>
+        </aside>
+    </div>
+
+    <div id="singlePostView" class="full-post-view hidden"></div>
+</main>
+
+<footer>
+    <div class="container">
+        <p>🌿 Mindful Mosaic — Listen to articles with built-in text-to-speech 🎧</p>
+    </div>
+</footer>
+
+<script>
+    // ==================== BLOG DATA with TAGS ====================
+    const blogPosts = [
+        {
+            id: 1,
+            title: "The Art of Slow Travel",
+            date: "March 15, 2025",
+            category: "travel",
+            tags: ["travel", "mindfulness", "adventure", "slow living"],
+            image: "https://picsum.photos/id/104/800/500",
+            excerpt: "Exploring hidden alleys and embracing the unhurried rhythm of local life. Discover why slow travel transforms the way we see the world.",
+            content: "Slow travel is about connection — to place, people, and yourself. Instead of rushing through landmarks, take time to breathe. In this post, we share stories from a tiny village in Tuscany and the magic of unplanned detours. Every step becomes a memory. Whether you're sipping coffee in a local café or wandering through markets, slow travel invites wonder. The journey itself becomes the destination."
+        },
+        {
+            id: 2,
+            title: "Minimalism & Digital Wellness",
+            date: "February 28, 2025",
+            category: "lifestyle",
+            tags: ["minimalism", "digital wellness", "productivity", "mental health"],
+            image: "https://picsum.photos/id/20/800/500",
+            excerpt: "How to declutter your digital life and find focus. Simple habits to reduce screen fatigue and reclaim mental space.",
+            content: "We live in an age of constant notifications. Digital minimalism isn't about ditching tech; it's about intentionality. Curate your apps, set boundaries, and rediscover offline hobbies. The result? Better sleep, deeper work, and more authentic connections. This post offers a 30-day digital declutter challenge. Start with one small change: turn off notifications for non-essential apps. Your mind will thank you."
+        },
+        {
+            id: 3,
+            title: "Wilderness & Creativity",
+            date: "March 5, 2025",
+            category: "nature",
+            tags: ["nature", "creativity", "inspiration", "journaling"],
+            image: "https://picsum.photos/id/29/800/500",
+            excerpt: "Why stepping into nature fuels creative breakthroughs. Forest bathing, journaling outdoors, and finding inspiration in silence.",
+            content: "Science shows that time in nature lowers cortisol and boosts divergent thinking. From mountain trails to coastal walks, we explore how wild places unlock fresh ideas. Grab a notebook and let the landscape guide your next creative project. The essay includes prompts for nature journaling. Try this: find a quiet spot outdoors, sit for 10 minutes, and write whatever comes to mind without judgment."
+        },
+        {
+            id: 4,
+            title: "Plant-Based Living Made Simple",
+            date: "March 20, 2025",
+            category: "food",
+            tags: ["plant-based", "healthy eating", "recipes", "wellness"],
+            image: "https://picsum.photos/id/127/800/500",
+            excerpt: "Easy tips for incorporating more plant-based meals into your routine without overwhelm.",
+            content: "Transitioning to a plant-based lifestyle doesn't have to be complicated. Start with one meatless day per week. Explore new grains, legumes, and seasonal vegetables. This post includes three simple recipes that even busy professionals can master. Remember: progress over perfection."
+        }
+    ];
+
+    // Extract all unique tags from posts
+    function getAllTags() {
+        const tagsSet = new Set();
+        blogPosts.forEach(post => {
+            post.tags.forEach(tag => tagsSet.add(tag));
+        });
+        return Array.from(tagsSet).sort();
+    }
+
+    // ==================== GLOBALS ====================
+    let currentView = "listing";
+    let currentPostId = null;
+    let currentFilterCategory = "all";
+    let currentFilterTag = null;
+    let currentSearchTerm = "";
+    let currentSpeech = null;
+    let isPlaying = false;
+    let currentUtterance = null;
+    
+    let commentsStorage = JSON.parse(localStorage.getItem("blog_comments")) || {};
+
+    function persistComments() {
+        localStorage.setItem("blog_comments", JSON.stringify(commentsStorage));
+    }
+
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-message';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2000);
+    }
+
+    // ==================== TEXT-TO-SPEECH FUNCTION ====================
+    function speakArticle(text, title, btnElement) {
+        // Stop any ongoing speech
+        if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+            window.speechSynthesis.cancel();
+            isPlaying = false;
+            if (btnElement) {
+                btnElement.innerHTML = "🔊 Listen to Article";
+                btnElement.classList.remove('playing');
+            }
+            showToast("🔇 Audio stopped");
+            return;
+        }
+        
+        // Clean the text for better reading
+        const cleanText = text.replace(/[#*_]/g, '').trim();
+        
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.rate = 0.9;      // Slightly slower for better comprehension
+        utterance.pitch = 1.0;      // Natural pitch
+        utterance.lang = 'en-US';    // English
+        
+        // Select a nice voice if available
+        const voices = window.speechSynthesis.getVoices();
+        const preferredVoice = voices.find(voice => voice.lang === 'en-US' && voice.name.includes('Google'));
+        if (preferredVoice) {
+            utterance.voice = preferredVoice;
+        }
+        
+        utterance.onstart = () => {
+            isPlaying = true;
+            if (btnElement) {
+                btnElement.innerHTML = "⏸️ Stop Reading";
+                btnElement.classList.add('playing');
+            }
+            showToast(`🎧 Now reading: "${title.substring(0, 40)}..."`);
+        };
+        
+        utterance.onend = () => {
+            isPlaying = false;
+            if (btnElement) {
+                btnElement.innerHTML = "🔊 Listen to Article";
+                btnElement.classList.remove('playing');
+            }
+            showToast("✅ Finished reading article");
+        };
+        
+        utterance.onerror = (event) => {
+            console.error('Speech error:', event);
+            isPlaying = false;
+            if (btnElement) {
+                btnElement.innerHTML = "🔊 Listen to Article";
+                btnElement.classList.remove('playing');
+            }
+            showToast("⚠️ Audio error. Please try again.");
+        };
+        
+        currentUtterance = utterance;
+        window.speechSynthesis.cancel(); // Clear any pending speech
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // ==================== SOCIAL SHARING ====================
+    function getShareUrls(title, url) {
+        const encodedUrl = encodeURIComponent(url);
+        const encodedTitle = encodeURIComponent(title);
+        return {
+            twitter: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,
+            facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+            linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}`,
+            whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`
+        };
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast("🔗 Link copied to clipboard!");
+        }).catch(() => {
+            showToast("Could not copy link");
+        });
+    }
+
+    // ==================== RENDER BLOG LISTING ====================
+    function renderBlogListing() {
+        const container = document.getElementById("postsContainer");
+        if (!container) return;
+
+        let filteredPosts = [...blogPosts];
+        
+        if (currentFilterCategory !== "all") {
+            filteredPosts = filteredPosts.filter(p => p.category === currentFilterCategory);
+        }
+        
+        if (currentFilterTag) {
+            filteredPosts = filteredPosts.filter(p => p.tags.includes(currentFilterTag));
+        }
+        
+        if (currentSearchTerm.trim() !== "") {
+            const term = currentSearchTerm.trim().toLowerCase();
+            filteredPosts = filteredPosts.filter(p => 
+                p.title.toLowerCase().includes(term) || 
+                p.excerpt.toLowerCase().includes(term) ||
+                p.tags.some(tag => tag.toLowerCase().includes(term))
+            );
+        }
+
+        if (filteredPosts.length === 0) {
+            container.innerHTML = `<div style="background:#f3efe7; border-radius:2rem; padding:3rem; text-align:center;">📭 No posts match your filters. Try different categories or tags.</div>`;
+            return;
+        }
+
+        container.innerHTML = filteredPosts.map(post => `
+            <article class="post-card" data-post-id="${post.id}">
+                <img class="post-img" src="${post.image}" alt="${post.title}" loading="lazy">
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span>📅 ${post.date}</span>
+                        <span>🏷️ ${post.category.charAt(0).toUpperCase() + post.category.slice(1)}</span>
+                    </div>
+                    <div class="post-tags">
+                        ${post.tags.map(tag => `<span class="tag" data-tag="${tag}">#${tag}</span>`).join('')}
+                    </div>
+                    <h2 class="post-title">${escapeHtml(post.title)}</h2>
+                    <p class="post-excerpt">${escapeHtml(post.excerpt)}</p>
+                    <button class="read-more" data-id="${post.id}">Read full story →</button>
+                </div>
+            </article>
+        `).join('');
+
+        document.querySelectorAll('.tag').forEach(tagEl => {
+            tagEl.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const tag = tagEl.getAttribute('data-tag');
+                currentFilterTag = tag;
+                currentFilterCategory = "all";
+                updateActiveFilters();
+                renderBlogListing();
+            });
+        });
+
+        document.querySelectorAll('.read-more').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(btn.getAttribute('data-id'));
+                showSinglePost(id);
+            });
+        });
+    }
+
+    function updateActiveFilters() {
+        document.querySelectorAll('#categoryList a').forEach(a => {
+            const cat = a.getAttribute('data-cat');
+            if (cat === currentFilterCategory && !currentFilterTag) {
+                a.classList.add('active');
+            } else {
+                a.classList.remove('active');
+            }
+        });
+        
+        document.querySelectorAll('#tagCloud a').forEach(a => {
+            const tag = a.getAttribute('data-tag');
+            if (tag === currentFilterTag) {
+                a.classList.add('active');
+            } else {
+                a.classList.remove('active');
+            }
+        });
+    }
+
+    // ==================== SINGLE POST VIEW ====================
+    function showSinglePost(postId) {
+        const post = blogPosts.find(p => p.id === postId);
+        if (!post) return;
+
+        currentPostId = postId;
+        currentView = "single";
+        const listingDiv = document.getElementById("blogListing");
+        const singleDiv = document.getElementById("singlePostView");
+        listingDiv.classList.add("hidden");
+        singleDiv.classList.remove("hidden");
+
+        const postComments = commentsStorage[postId] || [];
+        const pageUrl = window.location.href.split('#')[0] + `?post=${postId}`;
+        const shareUrls = getShareUrls(post.title, pageUrl);
+        
+        // Clean content for TTS (remove HTML)
+        const plainContent = post.content.replace(/<[^>]*>/g, '');
+        const fullTextForTTS = `${post.title}. ${plainContent}`;
+
+        singleDiv.innerHTML = `
+            <button class="back-btn" id="backToListBtn">← Back to all posts</button>
+            <div>
+                <div class="post-meta">
+                    <span>📅 ${post.date}</span>
+                    <span>🏷️ ${post.category}</span>
+                </div>
+                <div class="post-tags">
+                    ${post.tags.map(tag => `<span class="tag" data-tag="${tag}">#${tag}</span>`).join('')}
+                </div>
+                <h1 style="font-size:2.2rem; margin-bottom:1rem;">${escapeHtml(post.title)}</h1>
+                <img class="full-post-img" src="${post.image}" alt="${post.title}">
+                <div style="font-size:1.05rem; line-height:1.65; margin: 1.5rem 0;" id="postContent">
+                    ${escapeHtml(post.content).replace(/\n/g, '<br>')}
+                </div>
+                
+                <!-- LISTEN TO ARTICLE BUTTON (NEW FEATURE) -->
+                <div class="action-buttons">
+                    <button class="listen-btn" id="listenBtn">🔊 Listen to Article</button>
+                </div>
+                
+                <!-- SOCIAL SHARING BUTTONS -->
+                <div class="social-share">
+                    <button class="share-btn share-twitter" data-share="twitter">🐦 Twitter</button>
+                    <button class="share-btn share-facebook" data-share="facebook">📘 Facebook</button>
+                    <button class="share-btn share-linkedin" data-share="linkedin">🔗 LinkedIn</button>
+                    <button class="share-btn share-whatsapp" data-share="whatsapp">💬 WhatsApp</button>
+                    <button class="share-btn copy-link" data-share="copy">🔗 Copy Link</button>
+                </div>
+            </div>
+            
+            <!-- COMMENT SECTION -->
+            <div class="comment-section" id="commentSection">
+                <div class="comment-title">💬 Join the conversation (${postComments.length} comments)</div>
+                <div class="comment-form">
+                    <input type="text" id="commentName" placeholder="Your name" autocomplete="off">
+                    <textarea id="commentText" rows="3" placeholder="Share your thoughts..."></textarea>
+                    <button id="submitCommentBtn">Post comment</button>
+                </div>
+                <div class="comment-list" id="commentList">
+                    ${renderCommentList(postComments)}
+                </div>
+            </div>
+        `;
+
+        // Back button
+        document.getElementById("backToListBtn").addEventListener("click", () => {
+            // Stop any ongoing speech when leaving
+            if (window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+                isPlaying = false;
+            }
+            listingDiv.classList.remove("hidden");
+            singleDiv.classList.add("hidden");
+            currentView = "listing";
+            renderBlogListing();
+        });
+
+        // Listen to Article button
+        const listenBtn = document.getElementById("listenBtn");
+        listenBtn.addEventListener("click", () => {
+            speakArticle(fullTextForTTS, post.title, listenBtn);
+        });
+
+        // Social sharing buttons
+        document.querySelectorAll('[data-share]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const type = btn.getAttribute('data-share');
+                if (type === 'copy') {
+                    copyToClipboard(pageUrl);
+                } else if (shareUrls[type]) {
+                    window.open(shareUrls[type], '_blank', 'width=600,height=400');
+                }
+            });
+        });
+
+        // Tag click in single view
+        document.querySelectorAll('.tag').forEach(tagEl => {
+            tagEl.addEventListener('click', () => {
+                // Stop any ongoing speech
+                if (window.speechSynthesis.speaking) {
+                    window.speechSynthesis.cancel();
+                    isPlaying = false;
+                }
+                const tag = tagEl.getAttribute('data-tag');
+                listingDiv.classList.remove("hidden");
+                singleDiv.classList.add("hidden");
+                currentView = "listing";
+                currentFilterTag = tag;
+                currentFilterCategory = "all";
+                currentSearchTerm = "";
+                document.getElementById("searchInput").value = "";
+                updateActiveFilters();
+                renderBlogListing();
+            });
+        });
+
+        // Comment submit
+        document.getElementById("submitCommentBtn").addEventListener("click", () => {
+            const nameInput = document.getElementById("commentName");
+            const textInput = document.getElementById("commentText");
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+            if (!name || !text) {
+                alert("Please enter both name and comment.");
+                return;
+            }
+            const newComment = {
+                name: escapeHtml(name),
+                text: escapeHtml(text),
+                date: new Date().toLocaleString()
+            };
+            if (!commentsStorage[postId]) commentsStorage[postId] = [];
+            commentsStorage[postId].unshift(newComment);
+            persistComments();
+            
+            const updatedComments = commentsStorage[postId];
+            const commentListDiv = document.getElementById("commentList");
+            if (commentListDiv) {
+                commentListDiv.innerHTML = renderCommentList(updatedComments);
+            }
+            const titleDiv = document.querySelector("#commentSection .comment-title");
+            if (titleDiv) titleDiv.innerHTML = `💬 Join the conversation (${updatedComments.length} comments)`;
+            nameInput.value = "";
+            textInput.value = "";
+            showToast("💬 Comment posted!");
+        });
+    }
+
+    function renderCommentList(commentsArray) {
+        if (!commentsArray.length) return `<div style="padding:1rem; text-align:center; color:#7c8a7c;">✨ Be the first to share your thoughts.</div>`;
+        return commentsArray.map(c => `
+            <div class="single-comment">
+                <div class="comment-name">${c.name} <span style="font-size:0.7rem; font-weight:normal;">· ${c.date}</span></div>
+                <div class="comment-text">${c.text}</div>
+            </div>
+        `).join('');
+    }
+
+    function escapeHtml(str) {
+        if (!str) return "";
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // ==================== CATEGORY & TAG SIDEBAR ====================
+    function buildCategorySidebar() {
+        const catsSet = new Set(blogPosts.map(p => p.category));
+        const categoryListEl = document.getElementById("categoryList");
+        let html = `<li><a href="#" data-cat="all" class="active">All Posts</a></li>`;
+        for (let cat of catsSet) {
+            html += `<li><a href="#" data-cat="${cat}">${cat.charAt(0).toUpperCase() + cat.slice(1)}</a></li>`;
+        }
+        categoryListEl.innerHTML = html;
+
+        document.querySelectorAll('#categoryList a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                currentFilterCategory = link.getAttribute('data-cat');
+                currentFilterTag = null;
+                currentSearchTerm = "";
+                document.getElementById("searchInput").value = "";
+                updateActiveFilters();
+                renderBlogListing();
+            });
+        });
+    }
+
+    function buildTagCloud() {
+        const allTags = getAllTags();
+        const tagCloudEl = document.getElementById("tagCloud");
+        tagCloudEl.innerHTML = allTags.map(tag => `
+            <li><a href="#" data-tag="${tag}">#${tag}</a></li>
+        `).join('');
+        
+        document.querySelectorAll('#tagCloud a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                currentFilterTag = link.getAttribute('data-tag');
+                currentFilterCategory = "all";
+                currentSearchTerm = "";
+                document.getElementById("searchInput").value = "";
+                updateActiveFilters();
+                renderBlogListing();
+            });
+        });
+    }
+
+    // ==================== NAVIGATION & SEARCH ====================
+    function setupNavAndSearch() {
+        const navLinks = document.querySelectorAll('[data-nav]');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.getAttribute('data-nav');
+                if (page === 'home') {
+                    // Stop any ongoing speech when navigating home
+                    if (window.speechSynthesis.speaking) {
+                        window.speechSynthesis.cancel();
+                        isPlaying = false;
+                    }
+                    if (currentView === "single") {
+                        document.getElementById("blogListing").classList.remove("hidden");
+                        document.getElementById("singlePostView").classList.add("hidden");
+                        currentView = "listing";
+                    }
+                    currentFilterCategory = "all";
+                    currentFilterTag = null;
+                    currentSearchTerm = "";
+                    document.getElementById("searchInput").value = "";
+                    updateActiveFilters();
+                    renderBlogListing();
+                } else {
+                    alert(`✨ "${page.charAt(0).toUpperCase() + page.slice(1)}" page — coming soon! Blog functionality remains active.`);
+                }
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+
+        const homeLogo = document.getElementById("homeLogoLink");
+        if (homeLogo) {
+            homeLogo.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Stop any ongoing speech
+                if (window.speechSynthesis.speaking) {
+                    window.speechSynthesis.cancel();
+                    isPlaying = false;
+                }
+                if (currentView === "single") {
+                    document.getElementById("blogListing").classList.remove("hidden");
+                    document.getElementById("singlePostView").classList.add("hidden");
+                    currentView = "listing";
+                }
+                currentFilterCategory = "all";
+                currentFilterTag = null;
+                currentSearchTerm = "";
+                document.getElementById("searchInput").value = "";
+                updateActiveFilters();
+                renderBlogListing();
+                navLinks.forEach(l => l.classList.remove('active'));
+                document.querySelector('[data-nav="home"]')?.classList.add('active');
+            });
+        }
+
+        const searchBtn = document.getElementById("searchBtn");
+        const searchInput = document.getElementById("searchInput");
+        function applySearch() {
+            // Stop any ongoing speech when searching
+            if (window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+                isPlaying = false;
+            }
+            currentSearchTerm = searchInput.value;
+            currentFilterCategory = "all";
+            currentFilterTag = null;
+            if (currentView === "single") {
+                document.getElementById("blogListing").classList.remove("hidden");
+                document.getElementById("singlePostView").classList.add("hidden");
+                currentView = "listing";
+            }
+            updateActiveFilters();
+            renderBlogListing();
+        }
+        searchBtn.addEventListener('click', applySearch);
+        searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') applySearch(); });
+    }
+
+    // ==================== INITIALIZE ====================
+    function init() {
+        buildCategorySidebar();
+        buildTagCloud();
+        renderBlogListing();
+        setupNavAndSearch();
+        
+        // Load voices on page load
+        window.speechSynthesis.onvoiceschanged = () => {
+            console.log("Voices loaded");
+        };
+    }
+
+    init();
+</script>
+</body>
+</html>
